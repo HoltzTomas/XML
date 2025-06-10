@@ -29,7 +29,7 @@ if [ -z "$FOP_PATH" ]; then
 fi
 
 # ./TP.sh clean -> limpia los archivos generados
-if [ $# -eq 0 ] || [ "$1" = "clean" ] ; then
+if [ "$1" = "clean" ] ; then
     rm -f seasons_list.xml season_info.xml season_standings.xml season_id.txt handball_data.xml handball_page.fo handball_report.pdf
     echo "Cleanup complete"
     exit 0
@@ -69,7 +69,7 @@ if [ $? -ne 0 ]; then
 fi
 
 season_id="$(<season_id.txt)"
-echo "Season ID = $season_id"
+
 if [ -z "$season_id" ]; then
   echo "No season found with prefix $prefix"
   echo "<handball_data><error>No season found with prefix $prefix</error></handball_data>" > handball_data.xml
