@@ -25,7 +25,7 @@
             </xsl:when>
             <xsl:otherwise>
               <fo:block font-size="16pt" space-before.optimum="15pt" space-after.optimum="18pt">
-                Competitors of <xsl:value-of select="handball_data/season/name"/>
+                Competitors of <xsl:value-of select="handball_data/season/name/text()"/>
               </fo:block>
               <xsl:for-each select="handball_data/competitors/competitor">
                 <xsl:sort select="@name"/>

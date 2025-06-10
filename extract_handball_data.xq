@@ -9,7 +9,7 @@ return
       if (exists($season)) then
         (
           <season>
-            <name>{$season/@name}</name>
+            <name>{data($season/@name)}</name>
             <year>{$season/@year}</year>
             <category>{$season_info/category/@name}</category>
             <gender>{$season_info/competition/@gender}</gender>
