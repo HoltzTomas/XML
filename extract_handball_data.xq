@@ -10,9 +10,9 @@ return
         (
           <season>
             <name>{data($season/@name)}</name>
-            <year>{$season/@year}</year>
-            <category>{$season_info/category/@name}</category>
-            <gender>{$season_info/competition/@gender}</gender>
+            <year>{data($season/@year)}</year>
+            <category>{data($season/category/@name)}</category>
+            <gender>{data($season/competition/@gender)}</gender>
           </season>,
           <competitors>
             {

@@ -5,13 +5,12 @@
         <fo:simple-page-master master-name="first" margin-right="1.5cm" margin-left="1.5cm" margin-bottom="2cm" margin-top="1cm" page-width="21cm" page-height="29.7cm">
           <fo:region-body margin-top="1cm"/>
           <fo:region-before extent="1cm"/>
-          <fo:region-after extent="1.5cm"/>
         </fo:simple-page-master>
       </fo:layout-master-set>
       <fo:page-sequence master-reference="first">
         <fo:static-content flow-name="xsl-region-before">
           <fo:block line-height="14pt" font-size="10pt" text-align="end">
-            <xsl:value-of select="concat('Handball season for ', handball_data/season/name)"/>
+            <xsl:value-of select="concat(handball_data/season/category, ' Handball season for ', handball_data/season/gender, ' - ', handball_data/season/year)"/>
           </fo:block>
         </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
@@ -25,7 +24,7 @@
             </xsl:when>
             <xsl:otherwise>
               <fo:block font-size="16pt" space-before.optimum="15pt" space-after.optimum="18pt">
-                Competitors of <xsl:value-of select="handball_data/season/name/text()"/>
+                Competitors of <xsl:value-of select="handball_data/season/name"/>
               </fo:block>
               <xsl:for-each select="handball_data/competitors/competitor">
                 <xsl:sort select="@name"/>
@@ -41,9 +40,9 @@
   <xsl:template match="competitor">
     <fo:block font-size="12pt">
       <xsl:value-of select="@name"/>
-      <xsl:if test="@country"> (<xsl:value-of select="@country"/>)</xsl:if>
+      <xsl:if test="string-length(@country) > 0"> (<xsl:value-of select="@country"/>)</xsl:if>
     </fo:block>
-    <fo:table space-after.optimum="18pt" table-layout="fixed" width="100%">
+    <fo:table space-after.optimum="18pt" table-layout="fixed" width="100%" border-width="1pt" border-style="solid">
       <fo:table-column column-number="1" column-width="40%"/>
       <fo:table-column column-number="2" column-width="7%"/>
       <fo:table-column column-number="3" column-width="7%"/>
@@ -52,7 +51,7 @@
       <fo:table-column column-number="6" column-width="7%"/>
       <fo:table-column column-number="7" column-width="7%"/>
       <fo:table-column column-number="8" column-width="7%"/>
-      <fo:table-body border-width="1pt" border-style="solid">
+      <fo:table-body>
         <fo:table-row background-color="rgb(215,245,250)">
           <fo:table-cell><fo:block font-size="8pt" text-align="center">Group</fo:block></fo:table-cell>
           <fo:table-cell><fo:block font-size="8pt" text-align="center">Rank</fo:block></fo:table-cell>
