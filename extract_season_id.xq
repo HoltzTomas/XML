@@ -5,7 +5,8 @@ declare option output:omit-xml-declaration "yes";
 declare variable $prefix as xs:string external;
 
 let $seasons := doc("seasons_list.xml")/seasons/season
-let $match   := $seasons[starts-with(@name, $prefix)][1]
+let $matching_seasons := $seasons[starts-with(@name, $prefix)]
+let $match := $matching_seasons[not(exists($matching_seasons[@start_date < @start_date]))][1]
 return
   if (exists($match))
   then data($match/@id)

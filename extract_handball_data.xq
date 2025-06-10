@@ -16,12 +16,13 @@ return
           </season>,
           <competitors>
             {
-              for $competitor in $competitors
+              for $competitor_id in distinct-values($competitors/@id)
+              let $comp := $competitors[@id = $competitor_id][1]
               return
-                <competitor name="{$competitor/@name}" country="{$competitor/@country}">
+                <competitor name="{$comp/@name}" country="{$comp/@country}">
                   <standings>
                     {
-                      let $comp_standings := $standings[competitor/@id = $competitor/@id]
+                      let $comp_standings := $standings[competitor/@id = $competitor_id]
                       for $standing in $comp_standings
                       let $group := $standing/ancestor::group
                       return

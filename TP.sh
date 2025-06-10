@@ -2,14 +2,14 @@
 
 # Descomentar la línea correspondiente a tu sistema operativo
 # Linux
-SED_CMD="sed -i"
+#SED_CMD="sed -i"
 # macOS
-#SED_CMD="sed -i ''"
+SED_CMD="sed -i ''"
 
 
 # Ejecutar en la terminal por unica vez para setear los paths de SAXON y FOP
-#echo 'export SAXON_PATH=/path/to/saxon-he-12.7.jar' >> ~/.bashrc
-#echo 'export FOP_PATH=/path/to/fop' >> ~/.bashrc
+#echo 'export SAXON_PATH=/path/to/saxon-he-12.7.jar' >> ~/.zshrc
+#echo 'export FOP_PATH=/path/to/fop' >> ~/.zshrc
 #source ~/.bashrc
 
 # en mac es ~/.zshrc
@@ -18,13 +18,13 @@ SED_CMD="sed -i"
 # Verificar variables de entorno
 if [ -z "$SAXON_PATH" ]; then
     echo "Error: SAXON_PATH environment variable is not set"
-    echo "Please set it with: echo 'export SAXON_PATH=/path/to/saxon-he-12.7.jar' >> ~/.bashrc"
+    echo "Please set it with: echo 'export SAXON_PATH=/path/to/saxon-he-12.7.jar' >> ~/.zshrc"
     exit 1
 fi
 
 if [ -z "$FOP_PATH" ]; then
     echo "Error: FOP_PATH environment variable is not set"
-    echo "Please set it with: echo 'export FOP_PATH=/path/to/fop' >> ~/.bashrc"
+    echo "Please set it with: echo 'export FOP_PATH=/opt/homebrew/Cellar/saxon/12.7/libexec/Saxon-HE-12.7.jar' >> ~/.zshrc"
     exit 1
 fi
 
@@ -100,4 +100,4 @@ java -cp $SAXON_PATH:. \
      -s:handball_data.xml \
      -xsl:generate_fo.xsl \
      -o:handball_page.fo
-$FOP_PATH -fo handball_page.fo -pdf handball_report.pdf
+fop -fo handball_page.fo -pdf handball_report.pdf

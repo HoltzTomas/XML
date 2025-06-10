@@ -11,7 +11,7 @@
       <fo:page-sequence master-reference="first">
         <fo:static-content flow-name="xsl-region-before">
           <fo:block line-height="14pt" font-size="10pt" text-align="end">
-            <xsl:value-of select="concat(handball_data/season/category, ' Handball season for ', handball_data/season/gender, ' - ', handball_data/season/year)"/>
+            <xsl:value-of select="concat('Handball season for ', handball_data/season/name)"/>
           </fo:block>
         </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
@@ -27,7 +27,10 @@
               <fo:block font-size="16pt" space-before.optimum="15pt" space-after.optimum="18pt">
                 Competitors of <xsl:value-of select="handball_data/season/name"/>
               </fo:block>
-              <xsl:apply-templates select="handball_data/competitors/competitor"/>
+              <xsl:for-each select="handball_data/competitors/competitor">
+                <xsl:sort select="@name"/>
+                <xsl:apply-templates select="."/>
+              </xsl:for-each>
             </xsl:otherwise>
           </xsl:choose>
         </fo:flow>
